@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinelytics | Seu gosto em filmes, entendido.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <button type="button" class="brand" id="nav-logo" aria-label="Cinelytics, ir para o início">Cinelytics<span>.</span></button>
+            <button type="button" class="back-link hidden" id="nav-back">Voltar ao início</button>
+        </div>
+    </header>
+
+    <main>
+
+        <div id="home-page">
+            <section class="hero wrap">
+                <div>
+                    <h1>Seu gosto em filmes, finalmente entendido.</h1>
+                    <p class="lead">Monte uma Tier List com os filmes que você já viu. A análise mostra o que eles têm em comum e indica o que assistir depois.</p>
+                    <button type="button" class="btn-primary btn-start">Montar minha Tier List</button>
+                </div>
+
+                <figure class="sample">
+                    <div class="tiers" aria-hidden="true">
+                        <div class="tier-row">
+                            <span class="tier-label s">S</span>
+                            <div class="tier-list-render"><span class="chip">Interestelar</span><span class="chip">Parasita</span></div>
+                        </div>
+                        <div class="tier-row">
+                            <span class="tier-label a">A</span>
+                            <div class="tier-list-render"><span class="chip">Whiplash</span><span class="chip">Blade Runner 2049</span></div>
+                        </div>
+                        <div class="tier-row">
+                            <span class="tier-label b">B</span>
+                            <div class="tier-list-render"><span class="chip">Duna</span></div>
+                        </div>
+                        <div class="tier-row">
+                            <span class="tier-label c">C</span>
+                            <div class="tier-list-render"><span class="chip">Aquaman</span></div>
+                        </div>
+                        <div class="tier-row">
+                            <span class="tier-label d">D</span>
+                            <div class="tier-list-render"><span class="chip">Cats</span></div>
+                        </div>
+                    </div>
+                    <figcaption>Exemplo de Tier List</figcaption>
+                </figure>
+            </section>
+
+            <section class="how wrap">
+                <h2>Como funciona</h2>
+                <ol class="steps">
+                    <li>
+                        <h3>Busque os filmes que você já viu</h3>
+                        <p>Pesquise pelo nome e adicione à lista.</p>
+                    </li>
+                    <li>
+                        <h3>Organize em tiers</h3>
+                        <p>Do S, para os favoritos, ao D, para os que você menos gostou. Clique no título para mudar de tier.</p>
+                    </li>
+                    <li>
+                        <h3>Peça a análise</h3>
+                        <p>A IA descreve o seu gosto e sugere filmes que você ainda não listou.</p>
+                    </li>
+                </ol>
+            </section>
+        </div>
+
+        <div id="app-page" class="hidden">
+            <div class="workspace wrap">
+
+                <section aria-labelledby="list-title">
+                    <div class="panel-head">
+                        <h2 id="list-title">Sua Tier List</h2>
+                        <button type="button" class="btn-ghost" id="btn-share" title="Copiar a lista como texto">Copiar lista</button>
+                    </div>
+                    <p class="hint">Busque um filme e adicione. Clique no título para mudar de tier e em × para remover.</p>
+
+                    <div class="search-box">
+                        <input type="text" id="search-input" aria-label="Buscar filme" placeholder="Buscar filme (ex.: Interestelar)" autocomplete="off">
+                        <div id="search-results" class="search-results-dropdown hidden"></div>
+                    </div>
+
+                    <div class="tiers">
+                        <div class="tier-row" data-tier="S">
+                            <span class="tier-label s">S</span>
+                            <div class="tier-list-render" id="tier-S"></div>
+                        </div>
+                        <div class="tier-row" data-tier="A">
+                            <span class="tier-label a">A</span>
+                            <div class="tier-list-render" id="tier-A"></div>
+                        </div>
+                        <div class="tier-row" data-tier="B">
+                            <span class="tier-label b">B</span>
+                            <div class="tier-list-render" id="tier-B"></div>
+                        </div>
+                        <div class="tier-row" data-tier="C">
+                            <span class="tier-label c">C</span>
+                            <div class="tier-list-render" id="tier-C"></div>
+                        </div>
+                        <div class="tier-row" data-tier="D">
+                            <span class="tier-label d">D</span>
+                            <div class="tier-list-render" id="tier-D"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="analysis-panel" aria-labelledby="analysis-title">
+                    <h2 id="analysis-title">Análise</h2>
+
+                    <button type="button" class="btn-primary btn-block" id="btn-analyze" disabled>Analisar meu gosto</button>
+                    <p class="stale-note hidden" id="analysis-stale">Sua Tier List mudou desde a última análise. Analise de novo para atualizar.</p>
+
+                    <p class="analysis-empty" id="analysis-empty">Adicione filmes à lista e clique em "Analisar meu gosto" para ver o seu perfil.</p>
+
+                    <div id="analysis-result" class="hidden">
+                        <p class="archetype" id="analysis-archetype"></p>
+                        <p class="analysis-summary" id="analysis-summary"></p>
+                        <div class="stats" id="analysis-axes"></div>
+                    </div>
+
+                    <div class="recs">
+                        <h3>Recomendações</h3>
+                        <div id="rec-list">
+                            <p class="empty-msg">As recomendações personalizadas aparecem aqui depois da análise.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <p>&copy; 2026 Cinelytics</p>
+            <p>This product uses the TMDB API but is not endorsed or certified by TMDB. Streaming data by JustWatch.</p>
+        </div>
+    </footer>
+
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>
